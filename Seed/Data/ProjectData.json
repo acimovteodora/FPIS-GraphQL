@@ -1,0 +1,124 @@
+﻿[
+  {
+    "adoptionDate": "2020-01-06T05:55:13 -01:00",
+    "description": "Министарство процвете, науке и технологија, у жељи да мотивише младе људе, апелује на укључивање што већег броја студената, на различитим годинама студија, да учествују у реализацији овог пројекта. Познавања основних појмова PHP језика се подразумева, као и основно разумевање функцицонисања WordPress платформе.",
+    "note": "Уз меторисање се прати напредак студената ангажованих на пројекту.",
+    "internalMentor": {
+      "name": "Александар",
+      "surname": "Марковић"
+    },
+    "decisionMaker": {
+      "name": "Александар",
+      "surname": "Ђоковић"
+    },
+    "projectProposal": {
+      "name": "Развој тема, додатака и сервиса на WordPress платформи"
+    },
+    "documents": [],
+    "applications": [
+      {
+        "student": {
+          "index": "2016/0083"
+        },
+        "project": {},
+        "startDate": null,
+        "endDate": null,
+        "reason": "Неки разлог",
+        "experienceInPreviousProjects": true,
+        "accepted": false
+      },
+      {
+        "student": {
+          "index": "2017/1083"
+        },
+        "project": {},
+        "startDate": null,
+        "endDate": null,
+        "reason": "Разлог и познавање неког програмског језика",
+        "experienceInPreviousProjects": false,
+        "accepted": false
+      },
+      {
+        "student": {
+          "index": "2016/0213"
+        },
+        "project": {},
+        "startDate": null,
+        "endDate": null,
+        "reason": "Разлог и познавање неког програмског језика",
+        "experienceInPreviousProjects": false,
+        "accepted": false
+      },
+      {
+        "student": {
+          "index": "2016/0320"
+        },
+        "project": {},
+        "startDate": null,
+        "endDate": null,
+        "reason": "Разлог и познавање неког програмског језика",
+        "experienceInPreviousProjects": true,
+        "accepted": false
+      }
+    ]
+  },
+  {
+    "adoptionDate": "2020-03-25T05:55:13 -01:00",
+    "description": "Чланови маркетинг тима и Business Development Manager из компаније SAGA New Frontier Group, одржаће уводно предавање о пројекту „Позиционирање и промоција дигиталних и „манагед“ сервиса компаније Сага“. Сви тимови који буду одабрани ће имати стручну подршку ментора са Факултета и представника компаније SAGA New Frontier Group.",
+    "note": "",
+    "internalMentor": {
+      "name": "Александар",
+      "surname": "Марковић"
+    },
+    "decisionMaker": {
+      "name": "Александар",
+      "surname": "Ђоковић"
+    },
+    "projectProposal": {
+      "name": "Позиционирање и промоција дигиталних и „managed“ сервиса компаније Сага"
+    },
+    "documents": [],
+    "applications": [
+      {
+        "student": {
+          "index": "2017/1083"
+        },
+        "project": {},
+        "startDate": "2020-04-01T05:55:13 -01:00",
+        "endDate": "2020-04-25T05:55:13 -01:00",
+        "experienceInPreviousProjects": false,
+        "accepted": false
+      },
+      {
+        "student": {
+          "index": "2016/0083"
+        },
+        "project": {},
+        "startDate": "2020-04-01T05:55:13 -01:00",
+        "endDate": "2020-05-15T05:55:13 -01:00",
+        "experienceInPreviousProjects": true,
+        "accepted": false
+      },
+      {
+        "student": {
+          "index": "2016/0213"
+        },
+        "project": {},
+        "startDate": "2020-04-10T05:55:13 -01:00",
+        "endDate": "2020-05-30T05:55:13 -01:00",
+        "experienceInPreviousProjects": false,
+        "accepted": false
+      },
+      {
+        "student": {
+          "index": "2016/0320"
+        },
+        "project": {},
+        "startDate": "2020-04-13T05:55:13 -01:00",
+        "endDate": "2020-05-10T05:55:13 -01:00",
+        "experienceInPreviousProjects": true,
+        "accepted": false
+      }
+    ]
+  }
+]

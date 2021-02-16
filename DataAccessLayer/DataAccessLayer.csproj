@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200726101051_PositionMigration.cs" />
+    <Compile Remove="Migrations\20200726101051_PositionMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200726101612_EmployeeMigration.cs" />
+    <Compile Remove="Migrations\20200726101612_EmployeeMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200726101835_EmployeeMigration.cs" />
+    <Compile Remove="Migrations\20200726101835_EmployeeMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728081110_ExternalMentorMigration.cs" />
+    <Compile Remove="Migrations\20200728081110_ExternalMentorMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728081331_ExternalMentorMigration.cs" />
+    <Compile Remove="Migrations\20200728081331_ExternalMentorMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728085547_ApplicationMigration.cs" />
+    <Compile Remove="Migrations\20200728085547_ApplicationMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728095501_DocumentMigration.cs" />
+    <Compile Remove="Migrations\20200728095501_DocumentMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728120202_ProjectPlanInheritanceMigration.cs" />
+    <Compile Remove="Migrations\20200728120202_ProjectPlanInheritanceMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728122022_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728122022_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728122207_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728122207_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728122555_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728122555_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728122906_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728122906_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728123411_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728123411_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728132928_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728132928_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728134146_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728134146_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728134724_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728134724_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728134803_PhaseMigration.cs" />
+    <Compile Remove="Migrations\20200728134803_PhaseMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200728135921_EngagementMigration.cs" />
+    <Compile Remove="Migrations\20200728135921_EngagementMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200803193433_ProjectApplicationsMigration.cs" />
+    <Compile Remove="Migrations\20200803193433_ProjectApplicationsMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200803193534_ProjectApplicationsMigration.cs" />
+    <Compile Remove="Migrations\20200803193534_ProjectApplicationsMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200803193911_ProjectApplicationsMigration.cs" />
+    <Compile Remove="Migrations\20200803193911_ProjectApplicationsMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200828224305_StudentAttributesChangedMigration.cs" />
+    <Compile Remove="Migrations\20200828224305_StudentAttributesChangedMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+</Project>
