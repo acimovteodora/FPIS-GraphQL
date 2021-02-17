@@ -50,5 +50,23 @@ namespace Logic
                 return null;
             }
         }
+
+        public async Task<Company> GetByProjectProposalId(long projectProposalId)
+        {
+            try
+            {
+                ProjectProposal proposal = await context.Set<ProjectProposal>().Include(x => x.Company).FirstOrDefaultAsync(x => x.ProjectProposalID == projectProposalId);
+                return await context.Set<Company>()
+                        .Include(x => x.Contacts)
+                        .Include(x => x.Locations)
+                        .Include(x => x.Mentors)
+                        .FirstOrDefaultAsync(x => x.CompanyID == proposal.Company.CompanyID);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(">>>> " + ex.Message);
+                return null;
+            }
+        }
     }
 }

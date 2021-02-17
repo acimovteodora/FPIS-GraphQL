@@ -29,9 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Mutation\" />
-    <Folder Include="Query\" />
-    <Folder Include="Schema\" />
-    <Folder Include="Type\" />
   </ItemGroup>
 
 

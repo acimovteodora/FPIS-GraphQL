@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/student",
+      "launchUrl": "graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

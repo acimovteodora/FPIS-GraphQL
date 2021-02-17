@@ -18,6 +18,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using GraphQL.Types;
+using API.Schema;
+using API.Query;
+using API.Type;
+using GraphQL.Server;
+using GraphiQl;
 
 namespace API
 {
@@ -71,10 +77,43 @@ namespace API
                         ValidateAudience = false
                     };
                 });
+
+            //GraphQl
+            //TYPE
+            services.AddTransient<StudentType>();
+            services.AddTransient<SkillType>();
+            services.AddTransient<CompanyType>();
+            services.AddTransient<PhaseType>();
+            services.AddTransient<ApplicationType>();
+            services.AddTransient<ProjectProposalType>();
+            services.AddTransient<ProjectType>();
+            services.AddTransient<ProjectPlanType>();
+            services.AddTransient<EmployeeType>();
+            services.AddTransient<EngagementType>();
+            //QUERY
+            services.AddTransient<ApplicationQuery>();
+            services.AddTransient<CompanyQuery>();
+            services.AddTransient<EmployeeQuery>();
+            services.AddTransient<PhaseQuery>();
+            services.AddTransient<ProjectPlanQuery>();
+            services.AddTransient<ProjectProposalQuery>();
+            services.AddTransient<ProjectQuery>();
+            services.AddTransient<SkillQuery>();
+            services.AddTransient<StudentQuery>();
+            services.AddTransient<EngagementQuery>();
+            services.AddTransient<RootQuery>();
+            //MUTATION
+            //SCHEMA
+            services.AddTransient<ISchema, RootSchema>();
+
+            services.AddGraphQL(options =>
+            {
+                options.EnableMetrics = false;
+            }).AddSystemTextJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FPISContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -82,22 +121,26 @@ namespace API
             }
 
             //app.UseHttpsRedirection();
-
-            app.UseRouting();
             //app.UseCors(x => x
             //    .AllowAnyMethod()
             //    .AllowAnyHeader()
             //    .SetIsOriginAllowed(origin => true) // allow any origin
             //    .AllowCredentials());
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            //app.UseRouting();
+            //app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
-            app.UseAuthorization();
+            dbContext.Database.EnsureCreated();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseGraphiQl("/graphql"); //znaci da mi je poziv endpointa: localhost/5000/graphql
+            app.UseGraphQL<ISchema>();
         }
     }
 }

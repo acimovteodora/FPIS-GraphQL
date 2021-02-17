@@ -10,5 +10,6 @@ namespace Logic.ILogic
     {
         Task<List<Company>> GetByCriteria(string criteria);
         Task<Company> GetById(long id);
+        Task<Company> GetByProjectProposalId(long projectProposalId);
     }
 }
