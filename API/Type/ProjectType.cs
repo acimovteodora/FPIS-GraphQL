@@ -10,7 +10,7 @@ namespace API.Type
 {
     public class ProjectType : ObjectGraphType<Project>
     {
-        public ProjectType(IEmployeeLogic employeeLogic,  IApplicationLogic applicationLogic, IProjectProposalLogic projectProposalLogic)
+        public ProjectType( IApplicationLogic applicationLogic, IProjectProposalLogic projectProposalLogic)
         {
             Field(x => x.ProjectID);
             Field(x => x.AdoptionDate);
@@ -18,8 +18,8 @@ namespace API.Type
             Field(x => x.Description);
             //Field<EmployeeType>("internalMentor", resolve: context => { return employeeLogic.GetByID(context.Source.InternalMentor.EmployeeID); });
             //Field<EmployeeType>("decisionMaker", resolve: context => { return employeeLogic.GetByID(context.Source.DecisionMaker.EmployeeID); });
-            Field<ProjectProposalType>("projectProposal", resolve: context => { return projectProposalLogic.GetByProjectId(context.Source.ProjectID); });
-            Field<ListGraphType<ApplicationType>>("applications", resolve: context => { return applicationLogic.GetAllForProject(context.Source.ProjectID); });
+            FieldAsync<ProjectProposalType>("projectProposal", resolve: async context => { return await projectProposalLogic.GetByProjectId(context.Source.ProjectID); });
+            FieldAsync<ListGraphType<ApplicationType>>("applications", resolve: async context => { return await applicationLogic.GetAllForProject(context.Source.ProjectID); });
         }
     }
 }

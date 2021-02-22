@@ -14,15 +14,15 @@ namespace API.Query
     {
         public ProjectQuery(IProjectLogic projectLogic)
         {
-            Field<ProjectType>(
+            FieldAsync<ProjectType>(
                 "projectById",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return projectLogic.GetById(context.GetArgument<long>("id")); }
+                resolve: async context => { return await projectLogic.GetById(context.GetArgument<long>("id")); }
             );
-            Field<ListGraphType<ProjectType>>("projects", resolve: context => { return projectLogic.GetAll(); } );
+            FieldAsync<ListGraphType<ProjectType>>("projects", resolve: async context => { return await projectLogic.GetAll(); } );
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using API.Query;
+﻿using API.Mutation;
+using API.Query;
 using GraphQL.Utilities;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace API.Schema
         public RootSchema(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             Query = serviceProvider.GetRequiredService<RootQuery>();
+            Mutation = serviceProvider.GetRequiredService<RootMutation>();
         }
     }
 }

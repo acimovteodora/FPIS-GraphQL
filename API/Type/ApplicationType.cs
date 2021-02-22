@@ -19,8 +19,8 @@ namespace API.Type
             Field(x => x.EndDate, nullable: true);
             Field(x => x.ExperienceInPreviousProjects);
             Field(x => x.Reason);
-            Field<StudentType>("student", resolve: context => { return studentLogic.GetById(context.Source.StudentID); });
-            Field<ProjectPlanType>("projectPlan", resolve: context => { return projectLogic.GetById(context.Source.ProjectID); });
+            FieldAsync<StudentType>("student", resolve: async context => { return await studentLogic.GetById(context.Source.StudentID); });
+            FieldAsync<ProjectType>("project", resolve: async context => { return await projectLogic.GetById(context.Source.ProjectID); });
         }
     }
 }

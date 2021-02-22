@@ -14,13 +14,13 @@ namespace API.Query
     {
         public ProjectProposalQuery(IProjectProposalLogic proposalLogic)
         {
-            Field<ProjectProposalType>(
+            FieldAsync<ProjectProposalType>(
                 "proposalById",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return proposalLogic.GetById(context.GetArgument<long>("id")); }
+                resolve: async context => { return await proposalLogic.GetById(context.GetArgument<long>("id")); }
             );
         }
     }

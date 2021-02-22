@@ -10,7 +10,7 @@ namespace API.Type
 {
     public class ProjectPlanType : ObjectGraphType<ProjectPlan>
     {
-        public ProjectPlanType(IEmployeeLogic employeeLogic,  IPhaseLogic phaseLogic)
+        public ProjectPlanType(IPhaseLogic phaseLogic)
         {
             Field(x => x.ProjectID);
             Field(x => x.DocumentID);
@@ -20,7 +20,7 @@ namespace API.Type
             Field(x => x.Duration);
             Field(x => x.DateOfCompilation);
             //Field<EmployeeType>("employee", resolve: context => { return employeeLogic.GetByID(context.Source.ComposedBy.EmployeeID); }); //IZMENI, nema objekat composed by
-            Field<ListGraphType<PhaseType>>("phases", resolve: context => { return phaseLogic.GetByProjectPlan(context.Source.DocumentID); });
+            FieldAsync<ListGraphType<PhaseType>>("phases", resolve: async context => { return await phaseLogic.GetByProjectPlan(context.Source.DocumentID); });
         }
     }
 }

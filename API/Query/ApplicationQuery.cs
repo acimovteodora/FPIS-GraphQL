@@ -14,7 +14,7 @@ namespace API.Query
     {
         public ApplicationQuery(IApplicationLogic applicationLogic)
         {
-            Field<ApplicationType>(
+            FieldAsync<ApplicationType>(
                 "applicationByIds",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
@@ -23,25 +23,25 @@ namespace API.Query
                 {
                     Name = "studentId"
                 }),
-                resolve: context => { return applicationLogic.GetById(context.GetArgument<long>("projectId"), context.GetArgument<int>("studentId")); }
+                resolve: async context => { return await applicationLogic.GetById(context.GetArgument<long>("projectId"), context.GetArgument<int>("studentId")); }
             );
-            Field<ListGraphType<ApplicationType>>(
+            FieldAsync<ListGraphType<ApplicationType>>(
                 "applicationsByProject",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "projectId"
                 }),
-                resolve: context => { return applicationLogic.GetAllForProject(context.GetArgument<long>("projectId")); }
+                resolve: async context => { return await applicationLogic.GetAllForProject(context.GetArgument<long>("projectId")); }
             );
-            Field<ListGraphType<ApplicationType>>(
+            FieldAsync<ListGraphType<ApplicationType>>(
                 "applicationsByProjectAccepted",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "projectId"
                 }),
-                resolve: context => { return applicationLogic.GetAllForProjectAccepted(context.GetArgument<long>("projectId")); }
+                resolve: async context => { return await applicationLogic.GetAllForProjectAccepted(context.GetArgument<long>("projectId")); }
             );
-            Field<ListGraphType<ApplicationType>>(
+            FieldAsync<ListGraphType<ApplicationType>>(
                 "applicationsByCriteria",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
@@ -50,7 +50,7 @@ namespace API.Query
                 {
                     Name = "criteria"
                 }),
-                resolve: context => { return applicationLogic.GetByCriteriaForProject(context.GetArgument<long>("projectId"), context.GetArgument<string>("criteria")); }
+                resolve: async context => { return await applicationLogic.GetByCriteriaForProject(context.GetArgument<long>("projectId"), context.GetArgument<string>("criteria")); }
             );
         }
     }

@@ -24,6 +24,8 @@ using API.Query;
 using API.Type;
 using GraphQL.Server;
 using GraphiQl;
+using API.Mutation;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace API
 {
@@ -45,26 +47,28 @@ namespace API
                 s.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddControllers();
-            services.AddDbContext<FPISContext>(options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FPIS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+            services.AddDbContext<FPISContext>(options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FPIS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"),
+            ServiceLifetime.Transient);
+            //services.AddDbContext<FPISContext>(options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FPIS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
             //services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
-            services.AddTransient<IStudentLogic, StudentLogic>();
-            services.AddTransient<ICityLogic, CityLogic>();
-            services.AddTransient<ICompanyContactLogic, ContactCompanyLogic>();
-            services.AddTransient<ICompanyLogic, CompanyLogic>();
-            services.AddTransient<IEmployeeLogic, EmployeeLogic>();
-            services.AddTransient<IEmployeePositionLogic, EmployeePositionLogic>();
-            services.AddTransient<IExternalMentorContactLogic, ExternalMentorContactLogic>();
-            services.AddTransient<IExternalMentorLogic, ExternalMentorLogic>();
-            services.AddTransient<ILocationLogic, LocationLogic>();
-            services.AddTransient<IPositionLogic, PositionLogic>();
-            services.AddTransient<IProjectLogic, ProjectLogic>();
-            services.AddTransient<IProjectPlanLogic, ProjectPlanLogic>();
-            services.AddTransient<IProjectProposalLogic, ProjectProposalLogic>();
-            services.AddTransient<IScientificAreaLogic, ScientificAreaLogic>();
-            services.AddTransient<IApplicationLogic, ApplicationLogic>();
-            services.AddTransient<IEngagementLogic, EngagementLogic>();
-            services.AddTransient<IPhaseLogic, PhaseLogic>();
-            services.AddTransient<ISkillLogic, SkillLogic>();
+            services.AddScoped<IStudentLogic, StudentLogic>();
+            services.AddScoped<ICityLogic, CityLogic>();
+            services.AddScoped<ICompanyContactLogic, ContactCompanyLogic>();
+            services.AddScoped<ICompanyLogic, CompanyLogic>();
+            services.AddScoped<IEmployeeLogic, EmployeeLogic>();
+            services.AddScoped<IEmployeePositionLogic, EmployeePositionLogic>();
+            services.AddScoped<IExternalMentorContactLogic, ExternalMentorContactLogic>();
+            services.AddScoped<IExternalMentorLogic, ExternalMentorLogic>();
+            services.AddScoped<ILocationLogic, LocationLogic>();
+            services.AddScoped<IPositionLogic, PositionLogic>();
+            services.AddScoped<IProjectLogic, ProjectLogic>();
+            services.AddScoped<IProjectPlanLogic, ProjectPlanLogic>();
+            services.AddScoped<IProjectProposalLogic, ProjectProposalLogic>();
+            services.AddScoped<IScientificAreaLogic, ScientificAreaLogic>();
+            services.AddScoped<IApplicationLogic, ApplicationLogic>();
+            services.AddScoped<IEngagementLogic, EngagementLogic>();
+            services.AddScoped<IPhaseLogic, PhaseLogic>();
+            services.AddScoped<ISkillLogic, SkillLogic>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -79,6 +83,8 @@ namespace API
                 });
 
             //GraphQl
+            //services.Configure<KestrelServerOptions>(o => o.AllowSynchronousIO = true);
+
             //TYPE
             services.AddTransient<StudentType>();
             services.AddTransient<SkillType>();
@@ -90,6 +96,12 @@ namespace API
             services.AddTransient<ProjectPlanType>();
             services.AddTransient<EmployeeType>();
             services.AddTransient<EngagementType>();
+            services.AddTransient<ApplicationInputType>();
+            services.AddTransient<EmployeeInputType>();
+            services.AddTransient<SkillInputType>();
+            services.AddTransient<EngagementInputType>();
+            services.AddTransient<PhaseInputType>();
+            services.AddTransient<ProjectPlanInputType>();
             //QUERY
             services.AddTransient<ApplicationQuery>();
             services.AddTransient<CompanyQuery>();
@@ -103,8 +115,11 @@ namespace API
             services.AddTransient<EngagementQuery>();
             services.AddTransient<RootQuery>();
             //MUTATION
+            services.AddTransient<ApplicationMutation>();
+            services.AddTransient<ProjectPlanMutation>();
+            services.AddTransient<RootMutation>();
             //SCHEMA
-            services.AddTransient<ISchema, RootSchema>();
+            services.AddScoped<ISchema, RootSchema>();
 
             services.AddGraphQL(options =>
             {
@@ -140,7 +155,9 @@ namespace API
             dbContext.Database.EnsureCreated();
 
             app.UseGraphiQl("/graphql"); //znaci da mi je poziv endpointa: localhost/5000/graphql
+
             app.UseGraphQL<ISchema>();
+
         }
     }
 }

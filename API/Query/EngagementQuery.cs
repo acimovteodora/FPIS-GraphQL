@@ -14,7 +14,7 @@ namespace API.Query
     {
         public EngagementQuery(IEngagementLogic engagementLogic)
         {
-            Field<EngagementType>(
+            FieldAsync<EngagementType>(
                 "engagementByIds",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType>
                 {
@@ -23,15 +23,15 @@ namespace API.Query
                 {
                     Name = "studentId"
                 }),
-                resolve: context => { return engagementLogic.GetById(context.GetArgument<int>("phaseId"), context.GetArgument<int>("studentId")); }
+                resolve: async context => { return await engagementLogic.GetById(context.GetArgument<int>("phaseId"), context.GetArgument<int>("studentId")); }
             );
-            Field<ListGraphType<EngagementType>>(
+            FieldAsync<ListGraphType<EngagementType>>(
                 "engagementByPhase",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType>
                 {
                     Name = "phaseId"
                 }),
-                resolve: context => { return engagementLogic.GetByPhase(context.GetArgument<int>("phaseId")); }
+                resolve: async context => { return await engagementLogic.GetByPhase(context.GetArgument<int>("phaseId")); }
             );
         }
     }

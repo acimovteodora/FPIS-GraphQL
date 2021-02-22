@@ -14,21 +14,21 @@ namespace API.Query
     {
         public SkillQuery(ISkillLogic skillLogic)
         {
-            Field<SkillType>(
+            FieldAsync<SkillType>(
                 "skillById",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return skillLogic.GetById(context.GetArgument<int>("id")); }
+                resolve: async context => { return await skillLogic.GetById(context.GetArgument<int>("id")); }
             );
-            Field<ListGraphType<SkillType>>(
+            FieldAsync<ListGraphType<SkillType>>(
                 "skillsByPhase",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType>
                 {
                     Name = "phaseId"
                 }),
-                resolve: context => { return skillLogic.GetByPhase(context.GetArgument<int>("phaseId")); }
+                resolve: async context => { return await skillLogic.GetByPhase(context.GetArgument<int>("phaseId")); }
             );
         }
     }

@@ -14,13 +14,13 @@ namespace API.Query
     {
         public CompanyQuery(ICompanyLogic companyLogic)
         {
-            Field<CompanyType>(
+            FieldAsync<CompanyType>(
                 "companyById",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return companyLogic.GetById(context.GetArgument<long>("id")); }
+                resolve: async context => { return await companyLogic.GetById(context.GetArgument<long>("id")); }
             );
         }
     }

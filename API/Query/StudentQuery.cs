@@ -14,30 +14,30 @@ namespace API.Query
     {
         public StudentQuery(IStudentLogic studentLogic)
         {
-            Field<ListGraphType<StudentType>>("allStudents", resolve: context => { return studentLogic.GetAll(); });
-            Field<StudentType>(
+            FieldAsync<ListGraphType<StudentType>>("allStudents", resolve: async context => { return await studentLogic.GetAll(); });
+            FieldAsync<StudentType>(
                 "studentById",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return studentLogic.GetById(context.GetArgument<int>("id")); }
+                resolve: async context => { return await studentLogic.GetById(context.GetArgument<int>("id")); }
             );
-            Field<ListGraphType<StudentType>>(
+            FieldAsync<ListGraphType<StudentType>>(
                 "studentByCriteria",
                 arguments: new QueryArguments(new QueryArgument<StringGraphType>
                 {
                     Name = "criteria"
                 }),
-                resolve: context => { return studentLogic.GetByCriteria(context.GetArgument<string>("criteria")); }
+                resolve: async context => { return await studentLogic.GetByCriteria(context.GetArgument<string>("criteria")); }
             );
-            Field<ListGraphType<StudentType>>(
+            FieldAsync<ListGraphType<StudentType>>(
                 "acceptedStudents",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "projectId"
                 }),
-                resolve: context => { return studentLogic.GetAcceptedByProject(context.GetArgument<long>("projectId")); }
+                resolve: async context => { return await studentLogic.GetAcceptedByProject(context.GetArgument<long>("projectId")); }
             );
         }
     }

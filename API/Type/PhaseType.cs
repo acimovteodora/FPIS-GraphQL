@@ -10,7 +10,7 @@ namespace API.Type
 {
     public class PhaseType : ObjectGraphType<Phase>
     {
-        public PhaseType(ISkillLogic skillLogic, IProjectLogic projectLogic, IEngagementLogic engagementLogic)
+        public PhaseType(ISkillLogic skillLogic, IEngagementLogic engagementLogic)
         {
             Field(x => x.ProjectID);
             Field(x => x.DocumentID);
@@ -18,8 +18,8 @@ namespace API.Type
             Field(x => x.StartDate);
             Field(x => x.Description);
             Field(x => x.Duration);
-            Field<ListGraphType<SkillType>>("skills", resolve: context => { return skillLogic.GetByPhase(context.Source.PhaseID); });
-            Field<ListGraphType<EngagementType>>("engagements", resolve: context => { return engagementLogic.GetByPhase(context.Source.PhaseID); });
+            FieldAsync<ListGraphType<SkillType>>("requiredSkills", resolve: async context => { return await skillLogic.GetByPhase(context.Source.PhaseID); });
+            FieldAsync<ListGraphType<EngagementType>>("engagements", resolve: async context => { return await engagementLogic.GetByPhase(context.Source.PhaseID); });
         }
     }
 }

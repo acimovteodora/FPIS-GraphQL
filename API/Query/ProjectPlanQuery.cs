@@ -2,6 +2,8 @@
 using GraphQL;
 using GraphQL.Types;
 using Logic.ILogic;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -14,21 +16,22 @@ namespace API.Query
     {
         public ProjectPlanQuery(IProjectPlanLogic projectPlanLogic)
         {
-            Field<ProjectPlanType>(
+            FieldAsync<ProjectPlanType>(
                 "planByDocument",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType>
                 {
                     Name = "documentId"
                 }),
-                resolve: context => { return projectPlanLogic.GetById(context.GetArgument<int>("documentId")); }
+                resolve: async context => { return await projectPlanLogic.GetById(context.GetArgument<int>("documentId")); }
             );
-            Field<ProjectPlanType>(
+            FieldAsync<ProjectPlanType>(
                 "planByProject",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "projectId"
                 }),
-                resolve: context => { return projectPlanLogic.GetByProject(context.GetArgument<long>("projectId")); }
+                resolve: async context => { var plans = await projectPlanLogic.GetByProject(context.GetArgument<long>("projectId"));
+                    return plans; }
             );
         }
     }

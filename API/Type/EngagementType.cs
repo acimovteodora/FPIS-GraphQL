@@ -18,8 +18,8 @@ namespace API.Type
             Field(x => x.Description);
             Field(x => x.Name);
             Field(x => x.PhaseID);
-            Field<StudentType>("student", resolve: context => { return studentLogic.GetById(context.Source.StudentID); });
-            Field<PhaseType>("phase", resolve: context => { return phaseLogic.GetById(context.Source.PhaseID); });
+            FieldAsync<StudentType>("student", resolve: async context => { return await studentLogic.GetById(context.Source.StudentID); });
+            FieldAsync<PhaseType>("phase", resolve: async context => { return await phaseLogic.GetById(context.Source.PhaseID); });
         }
     }
 }

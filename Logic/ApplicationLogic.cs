@@ -113,5 +113,26 @@ namespace Logic
                 return false;
             }
         }
+
+        public async override Task<bool> Update(Application entity)
+        {
+            try
+            {
+                var application = await context.Set<Application>().Include(x=>x.Project).Include(x=>x.Student).FirstOrDefaultAsync(x => x.ProjectID == entity.ProjectID && x.StudentID == entity.StudentID);
+                if (application == null)
+                    return false;
+                application.Accepted = entity.Accepted;
+                application.EndDate = entity.EndDate;
+                application.ExperienceInPreviousProjects = entity.ExperienceInPreviousProjects;
+                application.Reason = entity.Reason;
+                application.StartDate = entity.StartDate;
+                return await context.SaveChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(">>>>" + ex.Message);
+                return false;
+            }
+        }
     }
 }

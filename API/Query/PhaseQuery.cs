@@ -14,21 +14,21 @@ namespace API.Query
     {
         public PhaseQuery(IPhaseLogic phaseLogic)
         {
-            Field<PhaseType>(
+            FieldAsync<PhaseType>(
                 "phasetById",
                 arguments: new QueryArguments(new QueryArgument<IntGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return phaseLogic.GetById(context.GetArgument<int>("id")); }
+                resolve: async context => { return await phaseLogic.GetById(context.GetArgument<int>("id")); }
             );
-            Field<ListGraphType<PhaseType>>(
+            FieldAsync<ListGraphType<PhaseType>>(
                 "phasesByProjectPlan",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "projectPlanId"
                 }),
-                resolve: context => { return phaseLogic.GetByProjectPlan(context.GetArgument<long>("projectPlanId")); }
+                resolve: async context => { return await phaseLogic.GetByProjectPlan(context.GetArgument<long>("projectPlanId")); }
             );
         }
     }

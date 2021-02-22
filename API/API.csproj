@@ -27,9 +27,5 @@
     <ProjectReference Include="..\Seed\Seed.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mutation\" />
-  </ItemGroup>
-
 
 </Project>

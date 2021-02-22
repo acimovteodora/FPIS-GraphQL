@@ -13,7 +13,7 @@ namespace Logic
 {
     public class ProjectPlanLogic : Repository<ProjectPlan, FPISContext>, IProjectPlanLogic
     {
-        public ProjectPlanLogic(FPISContext context, IStudentLogic studentLogic) : base(context)
+        public ProjectPlanLogic(FPISContext context) : base(context)
         {
         }
 
@@ -90,6 +90,7 @@ namespace Logic
                     {
                         foreach (var skill in phase.RequiredSkills)
                         {
+                            skill.ProjectID = entity.ProjectID;
                             skill.Phase = phase;
                         } 
                     }
@@ -144,25 +145,28 @@ namespace Logic
 
                             List<Skill> skillsToDelete = new List<Skill>();
 
-                            foreach (var skill in phase.RequiredSkills)
+                            if (phase.RequiredSkills != null && phase.RequiredSkills.Count>0)
                             {
-                                if (!phase2.RequiredSkills.Any(x => x.SkillID == skill.SkillID))
+                                foreach (var skill in phase.RequiredSkills)
                                 {
-                                    skillsToDelete.Add(skill);
-                                    continue;
-                                }
-                                foreach (var skill2 in phase2.RequiredSkills)
-                                {
-                                    if (skill.SkillID == skill2.SkillID)
+                                    if (!phase2.RequiredSkills.Any(x => x.SkillID == skill.SkillID))
                                     {
-                                        if (!skill2.Equals(skill))
-                                        {
-                                            skill.Name = skill2.Name;
-                                            skill.Description = skill.Description;
-                                        }
-                                        break;
+                                        skillsToDelete.Add(skill);
+                                        continue;
                                     }
-                                }
+                                    foreach (var skill2 in phase2.RequiredSkills)
+                                    {
+                                        if (skill.SkillID == skill2.SkillID)
+                                        {
+                                            if (!skill2.Equals(skill))
+                                            {
+                                                skill.Name = skill2.Name;
+                                                skill.Description = skill.Description;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                } 
                             }
                             if (skillsToDelete.Count != 0)
                             {
@@ -181,16 +185,19 @@ namespace Logic
 
                             List<Engagement> engsToDelete = new List<Engagement>();
 
-                            foreach (var eng in phase.Engagements)
+                            if (phase.Engagements!=null && phase.Engagements.Count>0)
                             {
-                                if (!phase2.Engagements.Any(x => x.PhaseID == eng.PhaseID && x.StudentID == eng.StudentID))
+                                foreach (var eng in phase.Engagements)
                                 {
-                                    //phase.Engagements.Remove(eng);
-                                    //if (phase.Engagements == null || phase.Engagements.Count == 0)
-                                    //    break;
-                                    engsToDelete.Add(eng);
-                                    continue;
-                                }
+                                    if (!phase2.Engagements.Any(x => x.PhaseID == eng.PhaseID && x.StudentID == eng.StudentID))
+                                    {
+                                        //phase.Engagements.Remove(eng);
+                                        //if (phase.Engagements == null || phase.Engagements.Count == 0)
+                                        //    break;
+                                        engsToDelete.Add(eng);
+                                        continue;
+                                    }
+                                } 
                             }
                             if(engsToDelete.Count != 0)
                             {

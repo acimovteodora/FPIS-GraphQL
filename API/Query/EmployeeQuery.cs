@@ -14,13 +14,13 @@ namespace API.Query
     {
         public EmployeeQuery(IEmployeeLogic employeeLogic)
         {
-            Field<EmployeeType>(
+            FieldAsync<EmployeeType>(
                 "employeeById",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
                     Name = "id"
                 }),
-                resolve: context => { return employeeLogic.GetByID(context.GetArgument<long>("id")); }
+                resolve: async context => { return await employeeLogic.GetByID(context.GetArgument<long>("id")); }
             );
         }
     }
