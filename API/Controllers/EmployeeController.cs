@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using DataTransferObjects.EmployeeDTO;
 using Logic.ILogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +33,9 @@ namespace API.Controllers
 
         // GET: api/Employee/login
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(AuthEmployee employee)
         {
-            var employeeDb = await _logic.Login(username.ToLower(), password.ToLower());
+            var employeeDb = await _logic.Login(employee.Username.ToLower(), employee.Password.ToLower());
             if (employeeDb == null)
                 return Unauthorized();
 

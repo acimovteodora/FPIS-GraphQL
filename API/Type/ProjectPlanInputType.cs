@@ -17,7 +17,6 @@ namespace API.Type
             Field<StringGraphType>("note");
             Field<DateTimeGraphType>("estimatedStartDate");
             Field<DateTimeGraphType>("dateOfCompilation");
-            Field<EmployeeInputType>("composedBy");
             Field<ListGraphType<PhaseInputType>>("phases");
         }
     }

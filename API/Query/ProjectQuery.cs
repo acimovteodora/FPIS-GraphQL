@@ -18,11 +18,19 @@ namespace API.Query
                 "projectById",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
-                    Name = "id"
+                    Name = "projectID"
                 }),
-                resolve: async context => { return await projectLogic.GetById(context.GetArgument<long>("id")); }
+                resolve: async context => { return await projectLogic.GetById(context.GetArgument<long>("projectID")); }
             );
             FieldAsync<ListGraphType<ProjectType>>("projects", resolve: async context => { return await projectLogic.GetAll(); } );
+            //FieldAsync<ListGraphType<ProjectType>>("projects", resolve: async context =>
+            //{
+            //    using (var dc = dataContext())
+            //        return await dc
+            //            .Projects
+            //            .Include(x => x.ProjectProposal)
+            //            .ToListAsync();
+            //});
         }
     }
 }

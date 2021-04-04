@@ -26,9 +26,9 @@ namespace API.Mutation
                 "editProjectPlan",
                 arguments: new QueryArguments(new QueryArgument<ProjectPlanInputType>
                 {
-                    Name = "plan"
+                    Name = "projectPlan"
                 }),
-                resolve: async context => { return await projectPlanLogic.Update(context.GetArgument<ProjectPlan>("plan")); }
+                resolve: async context => { return await projectPlanLogic.Update(context.GetArgument<ProjectPlan>("projectPlan")); }
             );
             FieldAsync<BooleanGraphType>(
                 "deleteProjectPlan",

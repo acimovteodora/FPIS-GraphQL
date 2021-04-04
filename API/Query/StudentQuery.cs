@@ -35,9 +35,9 @@ namespace API.Query
                 "acceptedStudents",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
-                    Name = "projectId"
+                    Name = "projectID"
                 }),
-                resolve: async context => { return await studentLogic.GetAcceptedByProject(context.GetArgument<long>("projectId")); }
+                resolve: async context => { return await studentLogic.GetAcceptedByProject(context.GetArgument<long>("projectID")); }
             );
         }
     }

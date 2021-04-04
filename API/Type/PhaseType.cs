@@ -16,6 +16,7 @@ namespace API.Type
             Field(x => x.DocumentID);
             Field(x => x.PhaseID);
             Field(x => x.StartDate);
+            Field(x => x.Name);
             Field(x => x.Description);
             Field(x => x.Duration);
             FieldAsync<ListGraphType<SkillType>>("requiredSkills", resolve: async context => { return await skillLogic.GetByPhase(context.Source.PhaseID); });

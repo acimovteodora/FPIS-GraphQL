@@ -75,7 +75,7 @@ namespace Logic
         {
             try
             {
-                entity.ComposedBy = await context.Set<Employee>().FirstOrDefaultAsync(x => x.EmployeeID == entity.ComposedBy.EmployeeID);
+                entity.ComposedBy = await context.Set<Employee>().FirstOrDefaultAsync();
                 foreach (var phase in entity.Phases)
                 {
                     if (phase.Engagements != null)
@@ -114,14 +114,14 @@ namespace Logic
                         .Include(x => x.ComposedBy)
                         .Include(x => x.Phases).ThenInclude(x => x.RequiredSkills)
                         .Include(x => x.Phases).ThenInclude(x => x.Engagements)
-                        .FirstOrDefaultAsync(x => x.DocumentID == entity.DocumentID);
+                        .FirstOrDefaultAsync(x => x.ProjectID == entity.ProjectID);
                 if (planFromDb == null)
                     return false;
                 //planFromDb.DateOfCompilation = entity.DateOfCompilation;
                 planFromDb.Title = entity.Title;
                 planFromDb.Duration = entity.Duration;
                 planFromDb.EstimatedStartDate = entity.EstimatedStartDate;
-                planFromDb.Note = entity.Note;
+                //planFromDb.Note = entity.Note;
 
                 List<Phase> phasesToDelete = new List<Phase>();
                 foreach (var phase in planFromDb.Phases)

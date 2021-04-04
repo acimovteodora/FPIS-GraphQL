@@ -49,6 +49,7 @@ namespace API
             services.AddControllers();
             services.AddDbContext<FPISContext>(options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FPIS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"),
             ServiceLifetime.Transient);
+            services.AddTransient<Func<FPISContext>>(options => () => options.GetService<FPISContext>());
             //services.AddDbContext<FPISContext>(options => options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FPIS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
             //services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             services.AddScoped<IStudentLogic, StudentLogic>();
@@ -86,6 +87,7 @@ namespace API
             //services.Configure<KestrelServerOptions>(o => o.AllowSynchronousIO = true);
 
             //TYPE
+            services.AddTransient<StudentInputType>();
             services.AddTransient<StudentType>();
             services.AddTransient<SkillType>();
             services.AddTransient<CompanyType>();
@@ -102,6 +104,7 @@ namespace API
             services.AddTransient<EngagementInputType>();
             services.AddTransient<PhaseInputType>();
             services.AddTransient<ProjectPlanInputType>();
+            services.AddTransient<ProjectPlanType2>();
             //QUERY
             services.AddTransient<ApplicationQuery>();
             services.AddTransient<CompanyQuery>();
@@ -136,22 +139,24 @@ namespace API
             }
 
             //app.UseHttpsRedirection();
-            //app.UseCors(x => x
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader()
-            //    .SetIsOriginAllowed(origin => true) // allow any origin
-            //    .AllowCredentials());
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                );
 
-            //app.UseRouting();
-            //app.UseAuthorization();
+            app.UseRouting();
+            app.UseAuthorization();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
+
+
             dbContext.Database.EnsureCreated();
 
             app.UseGraphiQl("/graphql"); //znaci da mi je poziv endpointa: localhost/5000/graphql

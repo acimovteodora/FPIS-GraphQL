@@ -24,13 +24,13 @@ namespace API.Query
                 }),
                 resolve: async context => { return await projectPlanLogic.GetById(context.GetArgument<int>("documentId")); }
             );
-            FieldAsync<ProjectPlanType>(
+            FieldAsync<ProjectPlanType2>(
                 "planByProject",
                 arguments: new QueryArguments(new QueryArgument<LongGraphType>
                 {
-                    Name = "projectId"
+                    Name = "projectID"
                 }),
-                resolve: async context => { var plans = await projectPlanLogic.GetByProject(context.GetArgument<long>("projectId"));
+                resolve: async context => { var plans = await projectPlanLogic.GetByProject(context.GetArgument<long>("projectID"));
                     return plans; }
             );
         }

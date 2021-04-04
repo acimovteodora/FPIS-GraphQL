@@ -17,6 +17,7 @@ namespace API.Type
             Field(x => x.Goal);
             Field(x => x.ProposalDate);
             Field(x => x.DaysDuration);
+            Field(x => x.StartDateProjectProposal);
             Field(x => x.Description);
             Field(x => x.Activities);
             FieldAsync<CompanyType>("company", resolve: async context => { return await companyLogic.GetByProjectProposalId(context.Source.ProjectProposalID); });

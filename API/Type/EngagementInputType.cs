@@ -15,6 +15,7 @@ namespace API.Type
             Field<LongGraphType>("projectID");
             Field<StringGraphType>("name");
             Field<StringGraphType>("description");
+            FieldAsync<StudentInputType>("student");
         }
     }
 }
