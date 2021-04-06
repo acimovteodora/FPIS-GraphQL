@@ -26,6 +26,7 @@ using GraphQL.Server;
 using GraphiQl;
 using API.Mutation;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using API.SignalRConfig;
 
 namespace API
 {
@@ -83,7 +84,7 @@ namespace API
                     };
                 });
 
-            //GraphQl
+            /* GraphQl related */
             //services.Configure<KestrelServerOptions>(o => o.AllowSynchronousIO = true);
 
             //TYPE
@@ -128,6 +129,12 @@ namespace API
             {
                 options.EnableMetrics = false;
             }).AddSystemTextJson();
+
+            /* SIGNAL R related*/
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -151,6 +158,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<HubConfig>("/mysignal");
             });
             //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
